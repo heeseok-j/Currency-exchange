@@ -1,5 +1,37 @@
 "use strict";
 
+// currency ratio
+let currencyRatio = {
+  JPY: {
+    JPY: 1,
+    KRW: 9.75,
+    USD: 0.0073,
+    CNY: 0.05,
+    unit: "円",
+  },
+  KRW: {
+    JPY: 0.1,
+    KRW: 1,
+    USD: 0.00075,
+    CNY: 0.0052,
+    unit: "ウォン",
+  },
+  USD: {
+    JPY: 137.51,
+    KRW: 1341.35,
+    USD: 1,
+    CNY: 6.91,
+    unit: "ドル",
+  },
+  CNY: {
+    JPY: 19.89,
+    KRW: 194.06,
+    USD: 0.14,
+    CNY: 1,
+    unit: "元",
+  },
+};
+
 // click event
 const formCurrencyBtn = document.querySelector("#from-currency-btn");
 const toCurrencyBtn = document.querySelector("#to-currency-btn");
@@ -44,38 +76,6 @@ for (let menuList = 0; menuList < toCurrency.length; menuList++) {
   });
 }
 
-// currency ratio
-let currencyRatio = {
-  JPY: {
-    JPY: 1,
-    KRW: 9.75,
-    USD: 0.0073,
-    CNY: 0.05,
-    unit: "円",
-  },
-  KRW: {
-    JPY: 0.1,
-    KRW: 1,
-    USD: 0.00075,
-    CNY: 0.0052,
-    unit: "ウォン",
-  },
-  USD: {
-    JPY: 137.51,
-    KRW: 1341.35,
-    USD: 1,
-    CNY: 6.91,
-    unit: "ドル",
-  },
-  CNY: {
-    JPY: 19.89,
-    KRW: 194.06,
-    USD: 0.14,
-    CNY: 1,
-    unit: "元",
-  },
-};
-
 // 5. 金額入力すると両替できるよう
 const fromResult = document.getElementById("from-result");
 const toResult = document.getElementById("to-result");
@@ -87,7 +87,6 @@ function fromPrintInput() {
   const fromInputResult = fromInput.value;
   // 入力したinput見せる
   let fromToMoney = fromInputResult * currencyRatio[fromCountry][toCountry];
-  console.log(fromToMoney);
   // 両替された価見せる
   toInput.value = fromToMoney;
   fromResult.innerText = `${fromInputResult}${currencyRatio[fromCountry]["unit"]} `;
