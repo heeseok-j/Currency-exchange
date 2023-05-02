@@ -9,37 +9,43 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <div class="exchange-currency-box">
-      <div class="currency-box">
-        <button class="currency-btn" id="from-currency-btn">JPY</button>
-        <div class="country" id="from-country">
-          <a href="#">JPY</a>
-          <a href="#">KRW</a>
-          <a href="#">USD</a>
-          <a href="#">CNY</a>
-        </div>
-        <div class="input-box">
-          <input onkeyup="printInput()" class="input-text" id="from-input" />
-          <div class="from-input-result" id="from-result">円</div>
-        </div>
-      </div>
-    </div>
-    <h1>=</h1>
-    <h1>=</h1>
-    <div class="exchange-currency-box">
-      <div class="currency-box">
-        <button class="currency-btn" id="to-currency-btn">JPY</button>
-        <div class="country" id="to-country">
-          <a href="#">JPY</a>
-          <a href="#">KRW</a>
-          <a href="#">USD</a>
-          <a href="#">CNY</a>
-        </div>
-        <div class="input-box">
-          <input onkeyup="printInput2()" class="input-text" id="to-input" />
-          <div class="to-input-result" id="to-result">円</div>
+    <section class="container">
+      <div class="exchange-currency-box">
+        <div class="currency-box">
+          <div class="from">From</div>
+          <button class="buttons" id="from-currency-btn">JPY</button>
+          <div class="country" id="from-country">
+            <a href="#">JPY</a>
+            <a href="#">KRW</a>
+            <a href="#">USD</a>
+            <a href="#">CNY</a>
+          </div>
+          <div class="input-box">
+            <input
+              onkeyup="fromPrintInput()"
+              class="input-text"
+              id="from-input"
+            />
+            <div class="from-input-result" id="from-result">円</div>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="exchange-currency-box">
+        <div class="currency-box">
+          <div class="to">To</div>
+          <button class="buttons" id="to-currency-btn">JPY</button>
+          <div class="country" id="to-country">
+            <a href="#">JPY</a>
+            <a href="#">KRW</a>
+            <a href="#">USD</a>
+            <a href="#">CNY</a>
+          </div>
+          <div class="input-box">
+            <input onkeyup="toPrintInput()" class="input-text" id="to-input" />
+            <div class="to-input-result" id="to-result">円</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

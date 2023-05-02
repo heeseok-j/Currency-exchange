@@ -1,107 +1,103 @@
 "use strict";
 
-// 박스 클릭 이벤트 (currency-button click event)
-const currencyBtn = document.querySelector("#from-currency-btn");
-const country = document.querySelector("#from-country");
-const currencyBtn2 = document.querySelector("#to-currency-btn");
-const country2 = document.querySelector("#to-country");
+// click event
+const formCurrencyBtn = document.querySelector("#from-currency-btn");
+const toCurrencyBtn = document.querySelector("#to-currency-btn");
+const fromCountryBtn = document.querySelector("#from-country");
+const toCountryBtn = document.querySelector("#to-country");
+
+formCurrencyBtn.addEventListener("click", () => {
+  fromCountryBtn.classList.toggle("active");
+});
+
+fromCountryBtn.addEventListener("click", () => {
+  fromCountryBtn.classList.toggle("active");
+});
+
+toCurrencyBtn.addEventListener("click", () => {
+  toCountryBtn.classList.toggle("active");
+});
+
+toCountryBtn.addEventListener("click", () => {
+  toCountryBtn.classList.toggle("active");
+});
+
+// 両替リストからアイテム選択すると国が変わる
 const fromCurrency = document.querySelectorAll("#from-country a");
 const toCurrency = document.querySelectorAll("#to-country a");
-
-currencyBtn.addEventListener("click", () => {
-  country.classList.toggle("active");
-});
-
-country.addEventListener("click", () => {
-  country.classList.toggle("active");
-});
-
-currencyBtn2.addEventListener("click", () => {
-  country2.classList.toggle("active");
-});
-
-country2.addEventListener("click", () => {
-  country2.classList.toggle("active");
-});
-
-// 환율 리스트에서 아이템 선택하면 아이템 바뀜(나라)
 let fromCountry = "JPY";
 let toCountry = "JPY";
 
 for (let menuList = 0; menuList < fromCurrency.length; menuList++) {
   fromCurrency[menuList].addEventListener("click", function () {
-    currencyBtn.textContent = this.textContent;
+    formCurrencyBtn.textContent = this.textContent;
     fromCountry = this.textContent;
-    printInput();
+    fromPrintInput();
   });
 }
 
 for (let menuList = 0; menuList < toCurrency.length; menuList++) {
   toCurrency[menuList].addEventListener("click", function () {
-    currencyBtn2.textContent = this.textContent;
+    toCurrencyBtn.textContent = this.textContent;
     toCountry = this.textContent;
-    printInput();
+    toPrintInput();
   });
 }
 
-// 환율정보 들고오기
+// currency ratio
 let currencyRatio = {
   JPY: {
     JPY: 1,
-    KRW: 9.5,
-    USD: 0.0072,
-    CNY: 0.052,
+    KRW: 9.75,
+    USD: 0.0073,
+    CNY: 0.05,
     unit: "円",
   },
   KRW: {
-    JPY: 0.11,
+    JPY: 0.1,
     KRW: 1,
-    USD: 0.00076,
-    CNY: 0.0054,
+    USD: 0.00075,
+    CNY: 0.0052,
     unit: "ウォン",
   },
   USD: {
-    JPY: 138.56,
-    KRW: 1317.43,
+    JPY: 137.51,
+    KRW: 1341.35,
     USD: 1,
-    CNY: 7.14,
+    CNY: 6.91,
     unit: "ドル",
   },
   CNY: {
-    JPY: 19.4,
-    KRW: 184.47,
+    JPY: 19.89,
+    KRW: 194.06,
     USD: 0.14,
     CNY: 1,
     unit: "元",
   },
 };
 
-// 5. 금액 입력하면 환전 가능하게
+// 5. 金額入力すると両替できるよう
 const fromResult = document.getElementById("from-result");
 const toResult = document.getElementById("to-result");
 const fromInput = document.getElementById("from-input");
 const toInput = document.getElementById("to-input");
 
-function printInput() {
-  // 인풋 값 입력하기
+function fromPrintInput() {
+  // input 入力
   const fromInputResult = fromInput.value;
-  // 인풋 환전 값 입력하기
+  // 入力したinput見せる
   let fromToMoney = fromInputResult * currencyRatio[fromCountry][toCountry];
   console.log(fromToMoney);
-  // 환전 값 보이게 하기 (to-result / to-input)
+  // 両替された価見せる
   toInput.value = fromToMoney;
   fromResult.innerText = `${fromInputResult}${currencyRatio[fromCountry]["unit"]} `;
   toResult.innerText = `${fromToMoney}${currencyRatio[toCountry]["unit"]} `;
 }
 
-function printInput2() {
-  // 인풋 값 입력하기
+function toPrintInput() {
   const toInputResult = toInput.value;
-  // 인풋 환전 값 입력하기
   let toFromMoney = toInputResult * currencyRatio[toCountry][fromCountry];
-  console.log(toFromMoney);
   fromInput.value = toFromMoney;
-  // 환전 값 보이게 하기 (from-result / from-input)
   toResult.innerText = `${toInputResult}${currencyRatio[toCountry]["unit"]} `;
   fromResult.innerText = `${toFromMoney}${currencyRatio[fromCountry]["unit"]} `;
 }
